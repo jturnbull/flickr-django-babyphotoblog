@@ -1,0 +1,4 @@
+<p><a href="{{ obj.get_absolute_url }}"><img src='{{ obj.small_url }}' /></a></p>
+{% if obj.description %}
+    {{ obj.description|safe|linebreaks }}
+{% endif %}

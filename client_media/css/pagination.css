@@ -1,0 +1,41 @@
+div.pagination {
+/*  padding: 3px;*/
+	margin: 3px;
+	text-align:center;
+/*  margin: 0;*/
+	padding: 1em;
+	clear: both;
+	font-size: 1.5em;
+    background: #fff;
+    border:6px solid #515F5C;
+}
+
+div.pagination a {
+	border: 1px solid #dedfde;
+	margin-right:3px;
+	padding:2px 6px;
+
+	background-position:bottom;
+	text-decoration: none;
+
+	color: #0061de;		
+}
+div.pagination a:hover, div.meneame a:active {
+	border: 1px solid #000;
+	background-image:none;
+	background-color:#0061de;
+	color: #fff;
+}
+div.pagination span.current {
+	margin-right:3px;
+	padding:2px 6px;
+	
+	font-weight: bold;
+	color: #ff0084;
+}
+div.pagination span.disabled {
+	margin-right:3px;
+	padding:2px 6px;
+
+	color: #adaaad;
+}

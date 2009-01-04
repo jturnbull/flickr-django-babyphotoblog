@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load comments gravatar form_utils %}
+
+{% block content %}
+
+
+
+        
+         <div class="post">
+                <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.image_url }}" width="740" class="thumbnail" /></a>
+            </div>
+            <div class="main_meta">
+                <h2>
+                    <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}">{{ photo }}</a>
+                </h2>
+                <ul>
+                    <li>
+                        {{ photo.description|linebreaks }}
+                    </li>
+                    <li>{{ photo.date_taken|date:"P F jS Y" }}
+                    </li>
+                    <!-- <li>Posted in <a href="http://isabellaturnbull.com/category/visitors/" title="View all posts in Visitors" rel="category tag">Visitors</a> -->
+                    </li>
+
+                </ul>
+                <p class="edit"></p>
+            </div>
+            
+            
+            {% get_comment_list for photo as comment_list %}
+            
+            {% if comment_list %}
+                <div id="comments">
+
+                	<h3 class="comment">Comments</h3>
+                
+            
+            {% for comment in comment_list %}
+                <div class="commentmetadata" >
+                			<ul>
+                				<li>{% gravatar_img_for_email comment.user_email %}
+                				    {{ comment.user_name }}</li>
+                				<li>{{ comment.submit_date|date:"P F jS Y" }}</li>
+                			</ul>
+                		</div>
+
+                		<div class="commentpost">
+                			{{ comment.comment|linebreaks }}
+                		</div>
+                
+            {% endfor %}
+            
+            </div>
+            
+            {% endif %}
+            
+            <div id="response">
+            <h3>Leave a Reply</h3>
+            
+            
+            {% get_comment_form for photo as form %}
+            <form action="{% comment_form_target %}" method="post" class="form">
+              {# {{ form.as_p }} #}
+
+              {% for field in form %}
+              {% render_as_p field %}
+              {% endfor %}
+              <p>
+                <input type="submit" name="submit" class="submit-post" value="Post">
+              </p>
+            </form>
+
+            </div>
+        
+    
+{% endblock %}
+

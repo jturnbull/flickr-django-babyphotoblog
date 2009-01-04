@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load comments pagination_tags %}
+
+{% block content %}
+
+{% autopaginate photos 6 %}
+
+
+    {% for photo in photos %}
+        
+         <div class="post">
+                <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.resized_image }}" width="740" class="thumbnail" /></a>
+            </div>
+            <div class="main_meta">
+                <h2>
+                    <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}">{{ photo }}</a>
+                </h2>
+                <ul>
+                    {% if photo.description %}
+                    <li>
+                        {{ photo.description|safe|linebreaks }}
+                    </li>                        
+                    {% endif %}
+
+                    <li>{{ photo.date_taken|date:"P F jS Y" }}
+                    </li>
+                    <!-- <li>Posted in <a href="http://isabellaturnbull.com/category/visitors/" title="View all posts in Visitors" rel="category tag">Visitors</a> -->
+                    </li>
+                    <li>
+                        {% get_comment_count for photo as comment_count %}
+                        
+                        <a href="/{{ photo.slug }}/#comments" title="Comment on {{ photo }}">{{ comment_count }} Comments</a>
+                    </li>
+                </ul>
+                <p class="edit"></p>
+            </div>
+        
+    {% endfor %}
+    
+    {% paginate %}
+{% endblock %}
+
