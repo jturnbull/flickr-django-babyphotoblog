@@ -93,7 +93,7 @@ INSTALLED_APPS = (
 
 FLICKR_API_KEY = ""
 FLICKR_USER_ID = ""
-FLICKR_SETFILTER = ""
+FLICKR_MACHINETAG = ""
 
 try:
     from local_settings import *
