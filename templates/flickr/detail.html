@@ -7,17 +7,19 @@
 
         
          <div class="post">
-                <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.image_url }}" width="740" class="thumbnail" /></a>
+                <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.resized_image }}" width="740" class="thumbnail" /></a>
             </div>
             <div class="main_meta">
                 <h2>
                     <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}">{{ photo }}</a>
                 </h2>
                 <ul>
+                    {% if photo.description %}
                     <li>
-                        {{ photo.description|linebreaks }}
+                        {{ photo.description|safe|linebreaks }}
                     </li>
-                    <li>{{ photo.date_taken|date:"P F jS Y" }}
+                    {% endif %}                    
+			<li>{{ photo.date_taken|date:"P F jS Y" }}
                     </li>
                     <!-- <li>Posted in <a href="http://isabellaturnbull.com/category/visitors/" title="View all posts in Visitors" rel="category tag">Visitors</a> -->
                     </li>
