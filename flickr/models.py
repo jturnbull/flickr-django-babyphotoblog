@@ -1,7 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from lib.AutoSlugField import AutoSlugField
-from comment_utils.moderation import CommentModerator, moderator
+from comment_utils.moderation import CommentModerator, moderator, AlreadyModerated
 
 #http://www.paragiraffe.com/posts/2008/sep/23/rewriting-my-flickr-importer/
 
@@ -82,4 +82,7 @@ class Photo(models.Model):
 class PhotoModerator(CommentModerator):
     email_notification = True
 
-#moderator.register(Photo, PhotoModerator)
+try:
+    moderator.register(Photo, PhotoModerator)
+except AlreadyModerated:
+    pass
