@@ -47,7 +47,7 @@
                 		</div>
 
                 		<div class="commentpost">
-                			{{ comment.comment|linebreaks }}
+                			{{ comment.comment|urlizetrunc:60|linebreaks }}
                 		</div>
                 
             {% endfor %}
