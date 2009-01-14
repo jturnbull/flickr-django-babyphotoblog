@@ -14,7 +14,8 @@ class Photo(models.Model):
     secret      = models.CharField(max_length=30, blank=True)
     originalsecret = models.CharField(max_length=30, blank=True)
     originalformat = models.CharField(max_length=3, blank=True)
-        
+    media = models.CharField(max_length=10, blank=True)
+    
     # Main metadata
     title           = models.CharField(max_length=250)
     slug            = AutoSlugField(max_length=127,populate_from="title",help_text='This will be automatically generated from the name', editable=True, blank=True, unique=True)
@@ -78,6 +79,9 @@ class Photo(models.Model):
     		newimage.save('%s/images/resized/%s.jpg' % (settings.MEDIA_ROOT, self.slug), 'jpeg') 
     		
     	return '%s/images/resized/%s.jpg' % (settings.MEDIA_URL, self.slug)
+    	
+    def embed_video(self):
+        return """<object type="application/x-shockwave-flash" width="640" height="480" data="http://www.flickr.com/apps/video/stewart.swf?v=66164" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"> <param name="flashvars" value="intl_lang=en-us&amp;photo_secret=%(s)s&amp;photo_id=%(i)s"></param> <param name="movie" value="http://www.flickr.com/apps/video/stewart.swf?v=66164"></param> <param name="bgcolor" value="#000000"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/video/stewart.swf?v=66164" bgcolor="#000000" allowfullscreen="true" flashvars="intl_lang=en-us&amp;photo_secret=%(s)s&amp;photo_id=%(i)s" height="480" width="640"></embed></object>""" % {"s": self.secret, "i": self.photo_id}
     
 class PhotoModerator(CommentModerator):
     email_notification = True

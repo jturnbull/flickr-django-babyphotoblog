@@ -47,6 +47,7 @@ for photo in photos:
         secret=photo.attrib['secret'],
         originalsecret=photo.attrib['originalsecret'],
         originalformat=photo.attrib['originalformat'],
+        media=photo.attrib['media'],
         title=photo.find('title').text,
         description=photo.find('description').text,
         comment_count=photo.find('comments').text,

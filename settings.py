@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'flickr',
     'pagination',
-    
+    'comment_utils',
     
 )
 
