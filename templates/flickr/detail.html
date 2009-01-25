@@ -7,7 +7,11 @@
 
         
          <div class="post">
-                <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.resized_image }}" width="740" class="thumbnail" /></a>
+             {% ifequal photo.media "video"  %}
+                 {{ photo.embed_video|safe }}
+                 {% else %}
+                 <a href="/{{ photo.slug }}/" rel="bookmark" title="Permanent Link to {{ photo }}"><img alt="{{ photo }}" src="{{ photo.resized_image }}" width="740" class="thumbnail" /></a>
+             {% endifequal %}
             </div>
             <div class="main_meta">
                 <h2>
