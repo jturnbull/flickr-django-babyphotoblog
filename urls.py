@@ -26,6 +26,16 @@ feeds = {
     'feed': PhotoFeed,
 }
 
+#FEED rewrites
+
+urlpatterns += patterns('django.views.generic.simple',
+    url(r'^wp-rss.php$', 'redirect_to', {'url': '/feed/'}),
+    url(r'^wp-rss2.php$', 'redirect_to', {'url': '/feed/'}),
+    url(r'^wp-rdf.php$', 'redirect_to', {'url': '/feed/'}),
+    url(r'^wp-atom.php$', 'redirect_to', {'url': '/feed/'}),
+    url(r'^feed/(.+)/$', 'redirect_to', {'url': '/feed/'}),
+    )
+
 urlpatterns += patterns('',
     (r'^(?P<url>feed)/$', 'django.contrib.syndication.views.feed',{'feed_dict': feeds}),
     url(r'^(?P<slug>[a-z0-9_-]+)/$', 'flickr.views.detail_photo', name="detail_photo"),
