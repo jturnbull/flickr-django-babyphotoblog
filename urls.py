@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 from django.conf  import settings
 import os
 from flickr.feeds import PhotoFeed
+from django.http import HttpResponseRedirect
 
 from django.contrib import admin
 admin.autodiscover()
@@ -28,12 +29,17 @@ feeds = {
 
 #FEED rewrites
 
-urlpatterns += patterns('django.views.generic.simple',
-    url(r'^wp-rss.php$', 'redirect_to', {'url': '/feed/'}),
-    url(r'^wp-rss2.php$', 'redirect_to', {'url': '/feed/'}),
-    url(r'^wp-rdf.php$', 'redirect_to', {'url': '/feed/'}),
-    url(r'^wp-atom.php$', 'redirect_to', {'url': '/feed/'}),
-    url(r'^feed/(.+)/$', 'redirect_to', {'url': '/feed/'}),
+def redirect_to_feed():
+    def inner(request, *args):
+        return HttpResponseRedirect("/feed/")
+    return inner
+
+urlpatterns += patterns('',
+    url(r'^wp-rss.php$', redirect_to_feed()),
+    url(r'^wp-rss2.php$', redirect_to_feed()),
+    url(r'^wp-rdf.php$', redirect_to_feed()),
+    url(r'^wp-atom.php$', redirect_to_feed()),
+    url(r'^feed/(.+)/$', redirect_to_feed()),
     )
 
 urlpatterns += patterns('',
